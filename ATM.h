@@ -26,6 +26,8 @@ class Bank {
     virtual vector<string> getAccList() const;
 
     virtual int getBalance(int acc_num) const;
+    void deposit(int acc_op, unsigned int money) const;
+    bool withdraw(int acc_op, unsigned int money) const;
 };
 
 class ATM {
@@ -41,4 +43,8 @@ class ATM {
     bool checkPIN() const;
 
     int getBalance(int acc_op) const;
+
+    void deposit(int acc_op, unsigned int money) const;
+
+    bool withdraw(int acc_op, unsigned int money) const;
 };

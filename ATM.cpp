@@ -35,6 +35,15 @@ bool Bank::verified() const {
     return verified_;
 }
 
+void Bank::deposit(int acc_op, unsigned int money) const {
+    card_account_[card_num_][acc_op].second += money;
+}
+bool Bank::withdraw(int acc_op, unsigned int money) const {
+    if (card_account_[card_num_][acc_op].second < money) return false;
+    card_account_[card_num_][acc_op].second -= money;
+    return true;
+}
+
 vector<string> Bank::getAccList() const {
     vector<string> ret_val;
     const auto& list = card_account_[card_num_];
@@ -67,4 +76,12 @@ bool ATM::checkPIN() const {
 
 int ATM::getBalance(int acc_op) const {
     return Bank::getInstance() -> getBalance(acc_op);
+}
+
+void ATM::deposit(int acc_op, unsigned int money) const {
+    Bank::getInstance() -> deposit(acc_op, money);
+}
+
+bool ATM::withdraw(int acc_op, unsigned int money) const {
+    return Bank::getInstance() ->withdraw(acc_op, money);
 }

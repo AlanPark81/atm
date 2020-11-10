@@ -38,6 +38,24 @@ int main() {
         cout << "wrong choice of account" << endl;
         return 1;
     }
-    cout << "your balance is " << atm->getBalance(acc_op) << endl;
+    while (true) {
+        cout << "your balance is " << atm->getBalance(acc_op) << endl;
+
+        cout << "1. withdraw" << endl;
+        cout << "2. deposit" << endl;
+        cout << "other. exit" << endl;
+        int choice;
+        cin >> choice;
+        if (choice == 1) {
+            int money;
+            cin >> money;
+            if (not atm->withdraw(acc_op, money)) cout << "not enough money" << endl;
+        } else if (choice == 2) {
+            int money;
+            cin >> money;
+            atm->deposit(acc_op, money);
+        } else break;
+    }
+    
     return 0;
 }
